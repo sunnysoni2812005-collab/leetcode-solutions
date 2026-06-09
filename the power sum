@@ -1,0 +1,22 @@
+def powerSum(X, N):
+
+    def dfs(remaining, num):
+
+        power = num ** N
+
+        if remaining == 0:
+            return 1
+
+        if remaining < 0:
+            return 0
+
+        if power > remaining:
+            return 0
+
+        include = dfs(remaining - power, num + 1)
+
+        exclude = dfs(remaining, num + 1)
+
+        return include + exclude
+
+    return dfs(X, 1)
