@@ -1,0 +1,31 @@
+n, m = map(int, input().split())
+
+a = [list(map(int, input().split())) for _ in range(n)]
+
+ans = 0
+
+for top in range(n):
+
+    col = [0] * m
+
+    for bottom in range(top, n):
+
+        for j in range(m):
+            col[j] += a[bottom][j]
+
+        even = 1
+        odd = 0
+        prefix = 0
+
+        for x in col:
+
+            prefix = (prefix + x) % 2
+
+            if prefix == 0:
+                ans += even
+                even += 1
+            else:
+                ans += odd
+                odd += 1
+
+print(ans)
