@@ -1,0 +1,18 @@
+class Solution:
+    def powerSet(self, s):
+
+        ans = []
+
+        def solve(i, cur):
+            if i == len(s):
+                ans.append(cur)
+                return
+
+            solve(i + 1, cur + s[i])  # take
+            solve(i + 1, cur)         # not take
+
+        solve(0, "")
+
+        ans.sort()
+
+        return ans
