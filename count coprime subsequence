@@ -1,0 +1,21 @@
+from math import gcd
+
+MOD = 1000000007
+
+t = int(input())
+
+for _ in range(t):
+    n = int(input())
+    a = list(map(int, input().split()))
+
+    dp = [1] * n
+    ans = n
+
+    for i in range(n):
+        for j in range(i):
+            if gcd(a[j], a[i]) == 1:
+                dp[i] = (dp[i] + dp[j]) % MOD
+
+        ans = (ans + dp[i] - 1) % MOD
+
+    print(ans)
