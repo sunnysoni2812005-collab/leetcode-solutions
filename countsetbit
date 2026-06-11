@@ -1,0 +1,15 @@
+class Solution:
+    def countSetBits(self, n):
+
+        if n == 0:
+            return 0
+
+        x = n.bit_length() - 1
+
+        bits_till_2x = x * (1 << (x - 1)) if x > 0 else 0
+
+        msb_bits = n - (1 << x) + 1
+
+        rest = n - (1 << x)
+
+        return bits_till_2x + msb_bits + self.countSetBits(rest)
