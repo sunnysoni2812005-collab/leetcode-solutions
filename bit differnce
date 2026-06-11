@@ -1,0 +1,11 @@
+class Solution:
+    def countBitsFlip(self, a, b):
+
+        x = a ^ b
+        cnt = 0
+
+        while x:
+            cnt += 1
+            x = x & (x - 1)
+
+        return cnt
