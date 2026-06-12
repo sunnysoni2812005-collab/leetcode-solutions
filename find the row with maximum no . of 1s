@@ -1,0 +1,33 @@
+class Solution:
+
+    def rowWithMax1s(self, arr):
+
+        n = len(arr)
+        m = len(arr[0])
+
+        max_ones = 0
+        ans = -1
+
+        for i in range(n):
+
+            l = 0
+            r = m - 1
+            first = m
+
+            while l <= r:
+
+                mid = (l + r) // 2
+
+                if arr[i][mid] == 1:
+                    first = mid
+                    r = mid - 1
+                else:
+                    l = mid + 1
+
+            ones = m - first
+
+            if ones > max_ones:
+                max_ones = ones
+                ans = i
+
+        return ans
