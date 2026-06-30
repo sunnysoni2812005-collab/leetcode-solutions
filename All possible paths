@@ -1,0 +1,30 @@
+class Solution:
+
+    def findAllPossiblePaths(self, mat):
+
+        n = len(mat)
+        m = len(mat[0])
+
+        ans = []
+        path = []
+
+        def solve(i, j):
+
+            path.append(mat[i][j])
+
+            if i == n - 1 and j == m - 1:
+                ans.append(path[:])
+                path.pop()
+                return
+
+            if j + 1 < m:
+                solve(i, j + 1)
+
+            if i + 1 < n:
+                solve(i + 1, j)
+
+            path.pop()
+
+        solve(0, 0)
+
+        return ans
