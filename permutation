@@ -1,0 +1,25 @@
+class Solution:
+
+    def permutation(self, s):
+
+        ans = []
+        s = list(s)
+
+        def solve(index):
+
+            if index == len(s):
+                ans.append("".join(s))
+                return
+
+            for i in range(index, len(s)):
+                s[index], s[i] = s[i], s[index]
+
+                solve(index + 1)
+
+                s[index], s[i] = s[i], s[index]
+
+        solve(0)
+
+        ans.sort()
+
+        return ans
