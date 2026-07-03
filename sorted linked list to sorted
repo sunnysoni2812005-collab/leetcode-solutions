@@ -1,0 +1,28 @@
+class Solution:
+    def sortedListToBST(self, head):
+        if head is None:
+            return None
+
+        if head.next is None:
+            return TNode(head.data)
+
+        prev = None
+        slow = head
+        fast = head
+
+        while fast and fast.next:
+            prev = slow
+            slow = slow.next
+            fast = fast.next.next
+
+        if prev:
+            prev.next = None
+
+        root = TNode(slow.data)
+
+        if head != slow:
+            root.left = self.sortedListToBST(head)
+
+        root.right = self.sortedListToBST(slow.next)
+
+        return root
