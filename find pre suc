@@ -1,0 +1,31 @@
+class Solution:
+    def findPreSuc(self, root, key):
+        pred = None
+        succ = None
+        curr = root
+
+        while curr:
+            if key < curr.data:
+                succ = curr
+                curr = curr.left
+
+            elif key > curr.data:
+                pred = curr
+                curr = curr.right
+
+            else:
+                # Find predecessor (maximum in left subtree)
+                temp = curr.left
+                while temp:
+                    pred = temp
+                    temp = temp.right
+
+                # Find successor (minimum in right subtree)
+                temp = curr.right
+                while temp:
+                    succ = temp
+                    temp = temp.left
+
+                break
+
+        return [pred, succ]
