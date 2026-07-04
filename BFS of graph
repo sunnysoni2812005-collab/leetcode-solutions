@@ -1,0 +1,28 @@
+class Solution:
+    def bfs(self, adj):
+        V = len(adj)
+
+        visited = [False] * V
+
+        queue = []
+
+        ans = []
+
+        queue.append(0)
+        visited[0] = True
+
+        while len(queue) != 0:
+
+            node = queue.pop(0)
+
+            ans.append(node)
+
+            for neighbour in adj[node]:
+
+                if visited[neighbour] == False:
+
+                    visited[neighbour] = True
+
+                    queue.append(neighbour)
+
+        return ans
