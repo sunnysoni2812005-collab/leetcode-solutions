@@ -1,0 +1,42 @@
+from collections import deque
+
+class Solution:
+    def updateMatrix(self, mat):
+
+        rows = len(mat)
+        cols = len(mat[0])
+
+        queue = deque()
+
+        # Answer matrix
+        ans = [[-1] * cols for _ in range(rows)]
+
+        # Sabhi 0 ko queue me daalo
+        for i in range(rows):
+            for j in range(cols):
+
+                if mat[i][j] == 0:
+                    ans[i][j] = 0
+                    queue.append((i, j))
+
+        directions = [(1,0), (-1,0), (0,1), (0,-1)]
+
+        # Multi Source BFS
+        while queue:
+
+            row, col = queue.popleft()
+
+            for dr, dc in directions:
+
+                nr = row + dr
+                nc = col + dc
+
+                # Valid aur abhi visit nahi hua
+                if (0 <= nr < rows and
+                    0 <= nc < cols and
+                    ans[nr][nc] == -1):
+
+                    ans[nr][nc] = ans[row][col] + 1
+                    queue.append((nr, nc))
+
+        return ans
