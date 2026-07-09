@@ -1,0 +1,63 @@
+from collections import deque
+
+class Solution:
+    def orangesRotting(self, grid):
+
+        rows = len(grid)
+        cols = len(grid[0])
+
+        queue = deque()
+        fresh = 0
+
+        # Queue me sab rotten oranges daal do
+        # Fresh oranges count karo
+        for i in range(rows):
+            for j in range(cols):
+
+                if grid[i][j] == 2:
+                    queue.append((i, j))
+
+                elif grid[i][j] == 1:
+                    fresh += 1
+
+        # Agar fresh orange hi nahi hai
+        if fresh == 0:
+            return 0
+
+        minutes = 0
+
+        directions = [(1,0),(-1,0),(0,1),(0,-1)]
+
+        # BFS
+        while queue and fresh > 0:
+
+            size = len(queue)
+
+            # Ek level = Ek minute
+            for _ in range(size):
+
+                row, col = queue.popleft()
+
+                # 4 directions
+                for dr, dc in directions:
+
+                    nr = row + dr
+                    nc = col + dc
+
+                    # Valid fresh orange
+                    if (0 <= nr < rows and
+                        0 <= nc < cols and
+                        grid[nr][nc] == 1):
+
+                        grid[nr][nc] = 2
+                        fresh -= 1
+
+                        queue.append((nr, nc))
+
+            minutes += 1
+
+        # Agar fresh bach gaya
+        if fresh > 0:
+            return -1
+
+        return minutes
