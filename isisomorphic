@@ -1,0 +1,19 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        map_st = {}
+        map_ts = {}
+
+        for a, b in zip(s, t):
+            if a in map_st:
+                if map_st[a] != b:
+                    return False
+            else:
+                map_st[a] = b
+
+            if b in map_ts:
+                if map_ts[b] != a:
+                    return False
+            else:
+                map_ts[b] = a
+
+        return True
